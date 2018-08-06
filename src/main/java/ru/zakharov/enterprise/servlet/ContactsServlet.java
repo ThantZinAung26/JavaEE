@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/order"})
-public class OrderServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/contacts"})
+public class ContactsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("order.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/contacts.jsp").forward(req, resp);
     }
 }
