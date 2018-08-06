@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.MainServlet</servlet-class>
+        <servlet-class>ru.zakharov.enterprise.servlet.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>CartServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.CartServlet</servlet-class>
+        <servlet-class>ru.zakharov.enterprise.servlet.CartServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -25,12 +25,32 @@
 
     <servlet>
         <servlet-name>CatalogServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.CatalogServlet</servlet-class>
+        <servlet-class>ru.zakharov.enterprise.servlet.CatalogServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>CatalogServlet</servlet-name>
         <url-pattern>/catalog</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>ru.zakharov.enterprise.servlet.ProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>ru.zakharov.enterprise.servlet.OrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/order</url-pattern>
     </servlet-mapping>
 
     <error-page>
@@ -45,7 +65,7 @@
 
     <filter>
         <filter-name>UTFFilter</filter-name>
-        <filter-class>ru.zakharov.enterprise.UTFFilter</filter-class>
+        <filter-class>ru.zakharov.enterprise.filter.UTFFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>

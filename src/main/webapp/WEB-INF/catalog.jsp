@@ -1,3 +1,5 @@
+<%@ page import="ru.zakharov.enterprise.entity.Product" %>
+<%@ page import="java.util.Collection" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
@@ -10,85 +12,34 @@
 
 <body>
 
-    <div class="container">
-        <div class="header">
-            <!--Меню в шапке-->
-            <a href="/robotica/main"><img class="logo floating_left_img" src="/robotica/pictures/logo.png" alt="Robotica logo"></a>
-            <ul class="menu">
-                <li><a href="/robotica/main">Главная</a></li>
-                <li><a href="/robotica/catalog">Каталог</a></li>
-                <li><a href="/robotica/cart">Корзина</a></li>
-                <li><a href="/robotica/order">Оформление заказа</a></li>
-                <li><a href="/robotica/contacts">Контакты</a></li>
-            </ul>
-            <!--Конец меню в шапке-->
+<%
+    final Object productsObject = request.getAttribute("products");
+    final Collection<Product> products = (Collection<Product>) productsObject;
 
-        </div>
-        <div class="content">
-            <h2>Каталог</h2>
-            <div class="catalog">
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
+%>
 
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
+<div class="container">
+    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <div class="content">
+        <h2>Каталог</h2>
+        <% for (Product product : products) { %>
+        <div class="catalog">
+            <div class="catalog_item">
+                <div class="catalog_image">
+                    <a href="/robotica/product?id=<%=product.getId()%>"><img class="catalog_img"
+                                                                             src="/robotica/pictures/<%=product.getPicFileName()%>"
+                                                                             alt="<%=product.getName()%>"></a>
                 </div>
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
-                <div class="catalog_item">
-                    <div class="catalog_image">
-                        <a href="xiaomi.jsp"><img class="catalog_img" src="/robotica/pictures/mi_small.jpg" alt="Xiaomi Mi"></a>
-                    </div>
-                    <div class="calalog_link"><a href="xiaomi.jsp">Страница товара Xiaomi Mi</a></div>
-                </div>
+                <div class="calalog_link"><a href="/robotica/product?id=<%=product.getId()%>">Страница
+                    товара <%=product.getName()%>
+                </a></div>
             </div>
+            <% } %>
         </div>
         <hr>
-        <div class="footer">
-            <hr>
-            <!--Началало подвала-->
-            <div class="footertext">
-                <p>&copy; Все права защищены.</p>
-            </div>
-            <!--Конец подвала-->
-        </div>
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </div>
-
+    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </body>
 
 </html>

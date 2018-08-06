@@ -1,16 +1,34 @@
-package ru.zakharov.enterprise;
+package ru.zakharov.enterprise.servlet;
 
+
+
+import ru.zakharov.enterprise.dao.CartDAO;
+import ru.zakharov.enterprise.dao.ProductDAO;
+import ru.zakharov.enterprise.entity.Product;
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/order"})
 public class OrderServlet extends HttpServlet {
+
+    @Inject
+    private ProductDAO productDAO;
+
+    @Inject
+    private CartDAO cartDAO;
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final String productId = req.getParameter("id");
+        final Product product = productDAO.getProductById(productId);
+
+        cartDAO.addProduct(productId);
+
+        req.setAttribute("product", product);
         req.getRequestDispatcher("WEB-INF/order.jsp").forward(req,resp);
     }
 }

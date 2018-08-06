@@ -1,4 +1,4 @@
-package ru.zakharov.enterprise;
+package ru.zakharov.enterprise.filter;
 
 import javax.servlet.*;
 import java.io.IOException;
