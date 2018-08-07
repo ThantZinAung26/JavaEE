@@ -2,6 +2,7 @@ package ru.zakharov.enterprise.servlet;
 
 
 
+import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.CartDAO;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.entity.Product;
@@ -23,12 +24,12 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String productId = req.getParameter("id");
+        final String productId = req.getParameter(FieldConsts.ID);
         final Product product = productDAO.getProductById(productId);
 
         cartDAO.addProduct(productId);
 
-        req.setAttribute("product", product);
+        req.setAttribute(FieldConsts.PRODUCT, product);
         req.getRequestDispatcher("WEB-INF/order.jsp").forward(req,resp);
     }
 }

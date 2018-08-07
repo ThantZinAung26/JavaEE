@@ -1,5 +1,6 @@
 package ru.zakharov.enterprise.servlet;
 
+import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.CartDAO;
 import ru.zakharov.enterprise.entity.Product;
 
@@ -20,7 +21,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final Collection<Product> productsInCart = cartDAO.getProductsInCart();
-        req.setAttribute("productsInCart", productsInCart);
+        req.setAttribute(FieldConsts.PRODUCTS_IN_CART, productsInCart);
         req.getRequestDispatcher("WEB-INF/cart.jsp").forward(req,resp);
     }
 }

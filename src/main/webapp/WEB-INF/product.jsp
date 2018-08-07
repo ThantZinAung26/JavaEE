@@ -1,4 +1,5 @@
 <%@ page import="ru.zakharov.enterprise.entity.Product" %>
+<%@ page import="ru.zakharov.enterprise.constants.FieldConsts" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -15,7 +16,7 @@
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
 
     <%
-        final Object productObject = request.getAttribute("product");
+        final Object productObject = request.getAttribute(FieldConsts.PRODUCT);
         final Product product = (Product) productObject;
     %>
 

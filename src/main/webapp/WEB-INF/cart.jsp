@@ -1,5 +1,6 @@
 <%@ page import="ru.zakharov.enterprise.entity.Product" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="ru.zakharov.enterprise.constants.FieldConsts" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
@@ -11,7 +12,8 @@
 </head>
 <body>
 <%
-    final Object cartObject = request.getAttribute("productsInCart");
+    final Object cartObject = request.getAttribute(
+            FieldConsts.PRODUCTS_IN_CART);
     final Collection<Product> productsInCart = (Collection<Product>) cartObject;
 
 %>

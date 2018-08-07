@@ -1,5 +1,6 @@
 <%@ page import="ru.zakharov.enterprise.entity.Product" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="ru.zakharov.enterprise.constants.FieldConsts" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
@@ -13,7 +14,7 @@
 <body>
 
 <%
-    final Object productsObject = request.getAttribute("products");
+    final Object productsObject = request.getAttribute(FieldConsts.PRODUCTS);
     final Collection<Product> products = (Collection<Product>) productsObject;
 
 %>
@@ -39,7 +40,6 @@
         <hr>
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </body>
 
 </html>

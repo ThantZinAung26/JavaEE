@@ -1,5 +1,6 @@
 package ru.zakharov.enterprise.servlet;
 
+import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.entity.Product;
 
@@ -19,7 +20,7 @@ public class CatalogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final Collection<Product> products = productDAO.getProducts();
-        req.setAttribute("products", products);
+        req.setAttribute(FieldConsts.PRODUCTS, products);
         req.getRequestDispatcher("WEB-INF/catalog.jsp").forward(req,resp);
     }
 }

@@ -1,4 +1,5 @@
 <%@ page import="ru.zakharov.enterprise.entity.Product" %>
+<%@ page import="ru.zakharov.enterprise.constants.FieldConsts" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
@@ -10,7 +11,7 @@
 </head>
 
 <%
-    final Object productObject = request.getAttribute("product");
+    final Object productObject = request.getAttribute(FieldConsts.PRODUCT);
     final Product product = (Product) productObject;
 %>
 <body>
