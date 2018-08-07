@@ -1,14 +1,16 @@
-package ru.zakharov.enterprise;
+package ru.zakharov.enterprise.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CatalogServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/error404"})
+public class Error404Handler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("catalog.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/error404.jsp").forward(req, resp);
     }
 }

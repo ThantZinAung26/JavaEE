@@ -1,4 +1,4 @@
-package ru.zakharov.enterprise;
+package ru.zakharov.enterprise.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/contacts"})
-public class ContactsServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/error403"})
+public class Error403Handler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("contacts.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/error403.jsp").forward(req, resp);
     }
 }
