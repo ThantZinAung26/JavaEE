@@ -57,4 +57,28 @@ public class Product {
     public int getPrice() {
         return price;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public void setFullDescription(String fullDescription) {
+        this.fullDescription = fullDescription;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setPicFileName(String picFileName) {
+        this.picFileName = picFileName;
+    }
 }

@@ -58,5 +58,15 @@ public class ProductDAO {
         return products.values();
     }
 
+    public void removeProductById(String productId) {
+        if (productId == null) return;
+        if (!products.containsKey(productId)) return;
+        products.remove(productId);
+    }
+
+    public void mergeProduct(String productId, Product mergedProduct) {
+        products.remove(productId);
+        products.put(productId, mergedProduct);
+    }
 
 }

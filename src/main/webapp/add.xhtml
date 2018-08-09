@@ -4,8 +4,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html" encoding="utf-8">
+
+    <h:head>
+
+    </h:head>
+
+    <h:body>
+        <ui:include src="/WEB-INF/templates/menu.xhtml"/>
+
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="products1" widgetVar="products1" var="product" value="#{dtAddRowView.products1}"
+                         editable="true" resizableColumns="true"
+                         style="margin-bottom:20px">
+                <f:facet name="header">
+                    Добавление и редактирование товаров
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{dtAddRowView.onRowEdit}" update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{dtAddRowView.onRowCancel}" update=":form:msgs"/>
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{product.id}"/></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{product.id}"
+                                                           style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Наименование">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{product.name}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{product.name}" style="width:100%"
+                                                           label="Наименование"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Цена">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{product.price}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{product.price}" style="width:100%"
+                                                           label="Цена"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Описание">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{product.shortDescription}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{product.shortDescription}" style="width:100%"
+                                                           label="Описание"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:32px">
+                    <p:rowEditor/>
+                </p:column>
+            </p:dataTable>
+
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p:commandButton value="Добавить товар" styleClass="ui-priority-primary" process="@this"
+                                     update=":form:msgs"
+                                     actionListener="#{dtAddRowView.onAddNew()}"
+                                     oncomplete="PF('products1').addRow();"/>
+                </div>
+            </div>
+
+        </h:form>
+
+    </h:body>
 </f:view>
+
 </html>
