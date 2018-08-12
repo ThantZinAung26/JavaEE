@@ -7,14 +7,33 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 
+    <h:outputStylesheet library="css" name="style.css"/>
+    <title>Интернет-магазин Robotica</title>
 
 </h:head>
 
 <h:body>
-    <ui:include src="/WEB-INF/templates/header.xhtml" />
+    <div class="container">
 
+    <div class="header">
+        <ui:insert name="header">
+            <ui:include src="/WEB-INF/templates/header.xhtml"/>
+        </ui:insert>
+    </div>
 
-    <ui:include src="/WEB-INF/templates/footer.xhtml" />
+    <div class="content">
+        <h1>Интернет-магазин Robotica</h1>
+        <p>Мы рады видеть Вас в нашем интернет-магазине.</p>
+        <p>Искренне надеемся, что Вы сможете выбрать для себя домашнего помощника по душе.</p>
+    </div>
+
+    <div class="footer">
+        <ui:insert name="footer">
+            <ui:include src="/WEB-INF/templates/footer.xhtml"/>
+        </ui:insert>
+    </div>
+</div>
+
 </h:body>
 
 </html>

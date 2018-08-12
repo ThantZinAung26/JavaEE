@@ -14,7 +14,7 @@
 
     <ui:include src="/WEB-INF/templates/menu.xhtml" />
     <h:form>
-        <p:dataTable id="dataTable" value="#{productListController.listProducts}" var="product">
+        <p:dataTable id="dataTable" value="#{productListController.products}" var="product">
 
             <p:column headerText="ID">
                 <p:outputLabel value="#{product.id}"/>
@@ -28,9 +28,9 @@
                 <p:outputLabel value="#{product.shortDescription}"/>
             </p:column>
 
-            <!--            <p:column headerText="Полное описание">
-                            <p:outputLabel value="#{product.fullDescription}"/>
-                        </p:column>-->
+            <p:column headerText="Полное описание">
+                <p:outputLabel value="#{product.fullDescription}"/>
+            </p:column>
 
             <p:column headerText="Цена">
                 <p:outputLabel value="#{product.price}"/>
@@ -42,9 +42,9 @@
 
             <!--кнопки редактирования и удаления-->
 <!--            <p:column>
-                <p:link outcome="product-edit.xhtml">
+                <p:link outcome="productOld-edit.xhtml">
                     <i class="fa fa-edit" style="font-size: 1.5em;margin: 5px;"/>
-                    <f:param name="id" value="#{product.id}"/>
+                    <f:param name="id" value="#{productOld.id}"/>
                 </p:link>
             </p:column>-->
 

@@ -3,74 +3,34 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    <servlet>
-        <servlet-name>MainServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.servlet.MainServlet</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>MainServlet</servlet-name>
-        <url-pattern>/main</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>CartServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.servlet.CartServlet</servlet-class>
-    </servlet>
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
 
-    <servlet-mapping>
-        <servlet-name>CartServlet</servlet-name>
-        <url-pattern>/cart</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>CatalogServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.servlet.CatalogServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CatalogServlet</servlet-name>
-        <url-pattern>/catalog</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.servlet.ProductServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ProductServlet</servlet-name>
-        <url-pattern>/product</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>OrderServlet</servlet-name>
-        <servlet-class>ru.zakharov.enterprise.servlet.OrderServlet</servlet-class>
-    </servlet>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>OrderServlet</servlet-name>
-        <url-pattern>/order</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error404</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/error404</location>-->
+    <!--</error-page>-->
 
-    <error-page>
-        <error-code>403</error-code>
-        <location>/error403</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>403</error-code>-->
+        <!--<location>/error403</location>-->
+    <!--</error-page>-->
 
     <filter>
         <filter-name>UTFFilter</filter-name>
