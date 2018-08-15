@@ -17,7 +17,8 @@
         <p:inputText value="#{categoryAddController.name}" placeholder="Имя категории"/>
         <p:inputText value="#{categoryAddController.shortDescription}" placeholder="Краткое описание"/>
         <p:inputText value="#{categoryAddController.creationDate}" type="hidden"/>
-        <p:commandButton value="Добавить категорию" actionListener="#{categoryAddController.saveCategory}"/>
+        <p:commandButton value="Добавить категорию" actionListener="#{categoryAddController.saveCategory}"
+                         update="dataTable"/>
 
         <p:dataTable id="dataTable" value="#{categoryListController.categories}" var="category">
 
