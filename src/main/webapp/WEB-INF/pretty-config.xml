@@ -34,7 +34,7 @@
 
     <url-mapping>
         <pattern value="category-add" />
-        <view-id value="/category-add.xhtml"/>
+        <view-id value="/category-list.xhtml"/>
     </url-mapping>
 -->
 
