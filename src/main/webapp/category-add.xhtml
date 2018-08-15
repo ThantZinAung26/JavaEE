@@ -12,43 +12,44 @@
 </h:head>
 
 <h:body>
-    <ui:include src="/WEB-INF/templates/menu.xhtml" />
-<h:form>
-    <p:inputText value="#{categoryAddController.name}" placeholder="Имя категории"/>
-    <p:inputText value="#{categoryAddController.shortDescription}" placeholder="Краткое описание"/>
-    <p:inputText value="#{categoryAddController.creationDate}" type="hidden"/>
-    <p:commandButton value="Добавить категорию" actionListener="#{categoryAddController.saveCategory}" />
+    <ui:include src="/WEB-INF/templates/menu.xhtml"/>
+    <h:form>
+        <p:inputText value="#{categoryAddController.name}" placeholder="Имя категории"/>
+        <p:inputText value="#{categoryAddController.shortDescription}" placeholder="Краткое описание"/>
+        <p:inputText value="#{categoryAddController.creationDate}" type="hidden"/>
+        <p:commandButton value="Добавить категорию" actionListener="#{categoryAddController.saveCategory}"/>
 
-    <p:dataTable id="dataTable" value="#{categoryListController.categories}" var="category">
+        <p:dataTable id="dataTable" value="#{categoryListController.categories}" var="category">
 
-        <p:column headerText="ID">
-            <p:outputLabel value="#{category.id}"/>
-        </p:column>
+            <p:column headerText="ID">
+                <p:outputLabel value="#{category.id}"/>
+            </p:column>
 
-        <p:column headerText="Название">
-            <p:outputLabel value="#{category.name}"/>
-        </p:column>
+            <p:column headerText="Название">
+                <p:outputLabel value="#{category.name}"/>
+            </p:column>
 
-        <p:column headerText="Краткое описание">
-            <p:outputLabel value="#{category.shortDescription}"/>
-        </p:column>
+            <p:column headerText="Краткое описание">
+                <p:outputLabel value="#{category.shortDescription}"/>
+            </p:column>
 
-        <!--кнопки редактирования и удаления-->
-        <!--            <p:column>
-                        <p:link outcome="productOld-edit.xhtml">
-                            <i class="fa fa-edit" style="font-size: 1.5em;margin: 5px;"/>
-                            <f:param name="id" value="#{productOld.id}"/>
-                        </p:link>
-                    </p:column>-->
+            <!--кнопки редактирования и удаления-->
+            <p:column>
+                <p:link outcome="category-edit">
+                    <i class="fa fa-edit" style="font-size: 1.5em;margin: 5px;"/>
+                    <f:param name="id" value="#{category.id}"/>
+                </p:link>
+            </p:column>
 
-        <p:column>
-            <p:commandLink actionListener="#{categoryListController.removeCategoryById(category.id)}" update="dataTable">
-                <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
-            </p:commandLink>
-        </p:column>
-        <!--кнопки редактирования и удаления-->
-    </p:dataTable>
-</h:form>
+            <p:column>
+                <p:commandLink actionListener="#{categoryListController.removeCategoryById(category.id)}"
+                               update="dataTable">
+                    <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
+                </p:commandLink>
+            </p:column>
+            <!--кнопки редактирования и удаления-->
+        </p:dataTable>
+    </h:form>
 
 </h:body>
 </html>
