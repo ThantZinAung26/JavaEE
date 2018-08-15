@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
@@ -12,9 +13,20 @@
 
 <h:body>
 
-    <ui:include src="/WEB-INF/templates/menu.xhtml" />
+    <ui:include src="/WEB-INF/templates/menu.xhtml"/>
+
     <h:form>
-        <p:dataTable id="dataTable" value="#{productListController.listProducts}" var="product">
+        <p:inputText value="#{productAddController.name}" placeholder="Имя продукта"/>
+        <p:selectOneMenu value="#{productAddController.categoryId}" style="width:30%">
+            <f:selectItems value="#{categoryListController.categories}" var="category" itemLabel="#{category.name}"
+                           itemValue="#{category.id}"/>
+        </p:selectOneMenu>
+        <p:inputText value="#{productAddController.price}" placeholder="Цена"/>
+        <p:inputText value="#{productAddController.shortDesc}" placeholder="Краткое описание"/>
+        <p:inputText value="#{productAddController.fullDesc}" placeholder="Полное описание"/>
+        <p:commandButton value="Добавить продукт" actionListener="#{productAddController.saveProduct}"
+                         update="dataTable"/>
+        <p:dataTable id="dataTable" value="#{productListController.products}" var="product">
 
             <p:column headerText="ID">
                 <p:outputLabel value="#{product.id}"/>
@@ -28,9 +40,9 @@
                 <p:outputLabel value="#{product.shortDescription}"/>
             </p:column>
 
-            <!--            <p:column headerText="Полное описание">
-                            <p:outputLabel value="#{product.fullDescription}"/>
-                        </p:column>-->
+            <p:column headerText="Полное описание">
+                <p:outputLabel value="#{product.fullDescription}"/>
+            </p:column>
 
             <p:column headerText="Цена">
                 <p:outputLabel value="#{product.price}"/>
@@ -41,20 +53,23 @@
             </p:column>
 
             <!--кнопки редактирования и удаления-->
-<!--            <p:column>
-                <p:link outcome="product-edit.xhtml">
-                    <i class="fa fa-edit" style="font-size: 1.5em;margin: 5px;"/>
-                    <f:param name="id" value="#{product.id}"/>
-                </p:link>
-            </p:column>-->
+            <!--            <p:column>
+                            <p:link outcome="productOld-edit.xhtml">
+                                <i class="fa fa-edit" style="font-size: 1.5em;margin: 5px;"/>
+                                <f:param name="id" value="#{productOld.id}"/>
+                            </p:link>
+                        </p:column>-->
 
             <p:column>
-                <p:commandLink actionListener="#{productListController.removeProductById(product.id)}" update="dataTable">
+                <p:commandLink actionListener="#{productListController.removeProductById(product.id)}"
+                               update="dataTable">
                     <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
                 </p:commandLink>
             </p:column>
             <!--кнопки редактирования и удаления-->
         </p:dataTable>
+
+
     </h:form>
 
 </h:body>

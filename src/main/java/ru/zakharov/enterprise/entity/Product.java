@@ -1,14 +1,13 @@
 package ru.zakharov.enterprise.entity;
 
-import java.util.UUID;
 
-public class Product {
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-    private String id = UUID.randomUUID().toString();
-
-    private String name = "";
-
-    private String shortDescription = "";
+@Entity
+public class Product extends AbstractEntity {
 
     private String fullDescription = "";
 
@@ -16,30 +15,25 @@ public class Product {
 
     private String picFileName = "";
 
+    @ManyToOne
+    private Category category = null;
+
     public Product() {
+
     }
 
     public Product(String name, String shortDescription) {
-        this.name = name;
-        this.shortDescription = shortDescription;
+        setName(name);
+        setShortDescription(shortDescription);
     }
-
 
     public Product(String name, String shortDescription,
                    String fullDescription, int price, String picFileName) {
-        this.name = name;
-        this.shortDescription = shortDescription;
+        setName(name);
+        setShortDescription(shortDescription);
         this.fullDescription = fullDescription;
         this.price = price;
         this.picFileName = picFileName;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getShortDescription() {
-        return this.shortDescription;
     }
 
     public String getFullDescription() {
@@ -50,24 +44,8 @@ public class Product {
         return picFileName;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public int getPrice() {
         return price;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
     }
 
     public void setFullDescription(String fullDescription) {
@@ -80,5 +58,13 @@ public class Product {
 
     public void setPicFileName(String picFileName) {
         this.picFileName = picFileName;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

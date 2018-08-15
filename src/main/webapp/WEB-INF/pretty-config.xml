@@ -1,0 +1,41 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+
+<!--
+    <url-mapping>
+        <pattern value="shop" />
+        <view-id value="/shop.xhtml"/>
+    </url-mapping>
+
+    <url-mapping>
+        <pattern value="product-list" />
+        <view-id value="/product-list.xhtml"/>
+    </url-mapping>
+
+    <url-mapping>
+        <pattern value="product-edit" />
+        <view-id value="/product-edit.xhtml"/>
+    </url-mapping>
+
+    &lt;!&ndash;<url-mapping>&ndash;&gt;
+        &lt;!&ndash;<pattern value="/category-list" />&ndash;&gt;
+        &lt;!&ndash;<view-id value="/category-list.xhtml"/>&ndash;&gt;
+    &lt;!&ndash;</url-mapping>&ndash;&gt;
+
+
+    <url-mapping>
+        <pattern value="shoporder-list" />
+        <view-id value="/shoporder-list.xhtml"/>
+    </url-mapping>
+
+
+    <url-mapping>
+        <pattern value="category-add" />
+        <view-id value="/category-add.xhtml"/>
+    </url-mapping>
+-->
+
+</pretty-config>

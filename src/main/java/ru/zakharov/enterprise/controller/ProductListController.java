@@ -1,26 +1,24 @@
 package ru.zakharov.enterprise.controller;
 
-import javax.validation.constraints.NotNull;
-
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.entity.Product;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-
-import java.util.Collection;
+import java.util.List;
 
 @ViewScoped
 @ManagedBean
 public class ProductListController {
 
     @Inject
-    private ProductDAO productDAO;
+    ProductDAO productDAO;
 
-    @NotNull
-    public Collection<Product> getListProducts() {
-        return productDAO.getProducts();
+
+
+    public List<Product> getProducts() {
+        return productDAO.getAllProducts();
     }
 
     public void removeProductById(String productId) {
