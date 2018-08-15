@@ -1,6 +1,7 @@
 package ru.zakharov.enterprise.controller;
 
 import ru.zakharov.enterprise.dao.CategoryDAO;
+import ru.zakharov.enterprise.entity.Category;
 
 
 import javax.faces.bean.ManagedBean;
@@ -22,4 +23,14 @@ public class CategoryListController {
     public List<String> getCategoriesIds() {
         return categoryDAO.getCategoriesIds();
     }
+
+    public List<Category> getCategories() {
+        return categoryDAO.getCategories();
+    }
+
+    public void removeCategoryById(String categoryId) {
+        categoryDAO.removeCategoryById(categoryId) ;
+    }
+
+
 }

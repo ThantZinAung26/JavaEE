@@ -13,7 +13,7 @@ import java.util.List;
 public class Category extends AbstractEntity {
 
 
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER , cascade = CascadeType.ALL , orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Product> productsInCategory;
 
     public Category() {}

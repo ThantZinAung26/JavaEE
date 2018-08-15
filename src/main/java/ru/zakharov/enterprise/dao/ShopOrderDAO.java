@@ -5,11 +5,12 @@ package ru.zakharov.enterprise.dao;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
 
-import javax.ejb.Stateful;
+
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 import java.util.List;
 
-@Stateful
+@Stateless
 public class ShopOrderDAO extends AbstractDAO{
 
     public ShopOrder merge(ShopOrder shopOrder) {

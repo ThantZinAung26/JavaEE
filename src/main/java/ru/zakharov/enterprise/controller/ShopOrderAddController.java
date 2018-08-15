@@ -9,12 +9,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class ShopOrderAddController {
 
