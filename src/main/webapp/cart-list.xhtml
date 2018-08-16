@@ -53,7 +53,7 @@
                 </p:column>
 
                 <p:column>
-                    <p:commandLink actionListener="#{cartListController.removeProduct(product)}"
+                    <p:commandLink actionListener="#{cartListController.removeProduct(product.id)}"
                                    update="dataTable">
                         <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
                     </p:commandLink>

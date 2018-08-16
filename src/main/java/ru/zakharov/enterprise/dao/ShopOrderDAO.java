@@ -49,13 +49,10 @@ public class ShopOrderDAO extends AbstractDAO {
 
     public void removeProductFromOrder(String orderId, Product product) {
 
-        Query query = entityManager.createQuery("DELETE FROM ShopOrder o WHERE");
-
-
-
         ShopOrder shopOrder = entityManager.find(ShopOrder.class, orderId);
 
         List<Product> list = shopOrder.getProductsInOrder();
+        System.out.println(list);
         list.remove(product);
 
         shopOrder.setProductsInOrder(list);
