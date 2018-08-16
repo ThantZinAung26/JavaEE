@@ -1,11 +1,12 @@
 package ru.zakharov.enterprise.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedEntityGraph(name = "graph.ShopOrder.products",
+        attributeNodes = @NamedAttributeNode(value = "productsInOrder"))
 public class ShopOrder extends AbstractEntity {
 
     private String fio = null;
@@ -16,7 +17,7 @@ public class ShopOrder extends AbstractEntity {
 
     }
 
-    @OneToMany
+    @ManyToMany
     private List<Product> productsInOrder;
 
 

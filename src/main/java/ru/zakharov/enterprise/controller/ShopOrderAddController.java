@@ -1,21 +1,27 @@
 package ru.zakharov.enterprise.controller;
 
+import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.dao.ShopOrderDAO;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
+import ru.zakharov.enterprise.logger.Logger;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class ShopOrderAddController {
 
@@ -25,8 +31,13 @@ public class ShopOrderAddController {
     @Inject
     private ProductDAO productDAO;
 
-    private ShopOrder shopOrder= new ShopOrder();
+    private HttpSession currentSession = (HttpSession) FacesContext.getCurrentInstance()
+            .getExternalContext().getSession(false);
+
+
+    private ShopOrder shopOrder = new ShopOrder();
     private List<Product> list = new LinkedList<>();
+
 
     private String name = null;
 
@@ -38,20 +49,28 @@ public class ShopOrderAddController {
 
     private Date creationDate = null;
 
-    public void saveShopOrder() {
+    private int quantity;
+
+    @Interceptors(Logger.class)
+    public String saveShopOrder() {
+
+        currentSession.setAttribute(FieldConsts.ORDER_ID, shopOrder.getId());
+        //shopOrder.setId(currentSession.getId());
         shopOrder.setProductsInOrder(list);
         shopOrder.setName(name);
         shopOrder.setFio(fio);
         shopOrder.setAddress(address);
         shopOrder.setCreationDate(new Date());
         shopOrderDAO.merge(shopOrder);
+
+        return "cart-list";
     }
 
 
+    @Interceptors(Logger.class)
     public void addProductToOrder(Product product) {
         list.add(product);
     }
-
 
     public String getFio() {
         return fio;

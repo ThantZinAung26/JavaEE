@@ -23,6 +23,8 @@
         </div>
 
         <div class="content">
+            <h:outputLabel value="#{session.id}"/>
+
             <h:form>
                 <p:dataTable id="dataTable" value="#{productListController.products}" var="product">
 
@@ -54,7 +56,7 @@
 
                 </p:dataTable>
 
-                <p:commandButton actionListener="#{shopOrderAddController.saveShopOrder()}" value="Сформировать заказ"/>
+                <p:commandButton actionListener="#{shopOrderAddController.saveShopOrder()}" value="Сформировать заказ" />
             </h:form>
         </div>
 
