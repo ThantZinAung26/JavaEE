@@ -24,7 +24,8 @@
         </div>
 
         <div class="content">
-            <h1>Выша покупки</h1>
+            <h1>Ваша корзина</h1>
+            <p>#{session.id}</p>
             <p:dataTable id="dataTable" value="#{cartListController.productList}" var="product">
 
                 <p:column headerText="ID">
@@ -52,7 +53,7 @@
                 </p:column>
 
                 <p:column>
-                    <p:commandLink actionListener="#{cartListController.removeProductById(product.id)}"
+                    <p:commandLink actionListener="#{cartListController.removeProduct(product)}"
                                    update="dataTable">
                         <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
                     </p:commandLink>

@@ -13,6 +13,10 @@
 
 </h:head>
 
+<f:metadata>
+    <f:viewAction action="#{shopOrderAddController.init(session)}"/>
+</f:metadata>
+
 <h:body>
     <div class="container">
 
@@ -23,7 +27,6 @@
         </div>
 
         <div class="content">
-            <h:outputLabel value="#{session.id}"/>
 
             <h:form>
                 <p:dataTable id="dataTable" value="#{productListController.products}" var="product">
@@ -56,7 +59,7 @@
 
                 </p:dataTable>
 
-                <p:commandButton actionListener="#{shopOrderAddController.saveShopOrder()}" value="Сформировать заказ" />
+                <p:button outcome="cart-list.xhtml" value="Перейти в корзину" />
             </h:form>
         </div>
 

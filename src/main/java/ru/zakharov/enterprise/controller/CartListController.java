@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
 import java.util.List;
 
 @ManagedBean
@@ -33,7 +34,7 @@ public class CartListController {
 
     private String orderId;
 
-    private List<Product> productList;
+    private List<Product> productList = new LinkedList<>();
 
     @Interceptors(Logger.class)
     public List<Product> getProductList() {
@@ -43,8 +44,8 @@ public class CartListController {
     }
 
     @Interceptors(Logger.class)
-    public void removeProductById(String productId) {
-        shopOrderDAO.removeProductById(orderId, productId);
+    public void removeProduct(Product product) {
+        shopOrderDAO.removeProductFromOrder(orderId, product);
     }
 
 }

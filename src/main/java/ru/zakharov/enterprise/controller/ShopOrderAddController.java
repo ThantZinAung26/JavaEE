@@ -52,24 +52,38 @@ public class ShopOrderAddController {
     private int quantity;
 
     @Interceptors(Logger.class)
-    public String saveShopOrder() {
-
+    public void init(HttpSession session) {
+        currentSession = session;
         currentSession.setAttribute(FieldConsts.ORDER_ID, shopOrder.getId());
-        //shopOrder.setId(currentSession.getId());
         shopOrder.setProductsInOrder(list);
         shopOrder.setName(name);
         shopOrder.setFio(fio);
         shopOrder.setAddress(address);
         shopOrder.setCreationDate(new Date());
-        shopOrderDAO.merge(shopOrder);
-
-        return "cart-list";
     }
+
+
+//    @Interceptors(Logger.class)
+//    public String saveShopOrder() {
+//
+//
+/////*        //shopOrder.setId(currentSession.getId());
+////        //shopOrder.setProductsInOrder(list);
+////        shopOrder.setName(name);
+////        shopOrder.setFio(fio);
+////        shopOrder.setAddress(address);
+////        shopOrder.setCreationDate(new Date());
+////        shopOrderDAO.merge(shopOrder);
+////
+////        return "cart-list";*/
+//    }
 
 
     @Interceptors(Logger.class)
     public void addProductToOrder(Product product) {
         list.add(product);
+        shopOrder.setProductsInOrder(list);
+        shopOrderDAO.merge(shopOrder);
     }
 
     public String getFio() {

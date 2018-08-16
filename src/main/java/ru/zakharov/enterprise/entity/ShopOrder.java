@@ -2,6 +2,7 @@ package ru.zakharov.enterprise.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class ShopOrder extends AbstractEntity {
     }
 
     @ManyToMany
-    private List<Product> productsInOrder;
+    private List<Product> productsInOrder = new LinkedList<>();
 
 
     public String getFio() {

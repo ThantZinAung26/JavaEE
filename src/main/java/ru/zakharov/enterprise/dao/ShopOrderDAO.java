@@ -46,11 +46,20 @@ public class ShopOrderDAO extends AbstractDAO {
         return entityManager.find(ShopOrder.class, orderId, hints);
     }
 
-    @Interceptors(Logger.class)
-    public void removeProductById(String orderId, String productId) {
+
+    public void removeProductFromOrder(String orderId, Product product) {
+
+        Query query = entityManager.createQuery("DELETE FROM ShopOrder o WHERE");
+
+
+
         ShopOrder shopOrder = entityManager.find(ShopOrder.class, orderId);
-        Product product = entityManager.find(Product.class, productId);
-        List<Product> productsInOrder = shopOrder.getProductsInOrder();
-        productsInOrder.remove(product);
+
+        List<Product> list = shopOrder.getProductsInOrder();
+        list.remove(product);
+
+        shopOrder.setProductsInOrder(list);
+
+        entityManager.merge(shopOrder);
     }
 }
