@@ -38,21 +38,20 @@ public class ProductAddController {
 
     public void saveProduct() {
         if (categoryId == null) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ошибка", "Заполните все поля");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        } else {
-            Product product = new Product();
-            product.setName(name);
-            product.setPrice(price);
-            product.setShortDescription(shortDesc);
-            product.setFullDescription(fullDesc);
-            product.setPicFileName(picFileName);
-            product.setCreationDate(new Date());
-            Category category = categoryDAO.getCategoryById(categoryId);
-            product.setCategory(category);
-            category.addToCategory(product);
-            productDAO.merge(product);
+            return;
         }
+
+        Product product = new Product();
+        product.setName(name);
+        product.setPrice(price);
+        product.setShortDescription(shortDesc);
+        product.setFullDescription(fullDesc);
+        product.setPicFileName(picFileName);
+        product.setCreationDate(new Date());
+        Category category = categoryDAO.getCategoryById(categoryId);
+        product.setCategory(category);
+        category.addToCategory(product);
+        productDAO.merge(product);
     }
 
     public String getName() {
