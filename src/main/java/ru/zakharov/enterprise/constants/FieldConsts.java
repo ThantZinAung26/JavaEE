@@ -10,4 +10,6 @@ public class FieldConsts {
 
     public static final String PRODUCTS_IN_CART = "productsInCart";
 
+    public static final String ORDER_ID = "orederId";
+
 }

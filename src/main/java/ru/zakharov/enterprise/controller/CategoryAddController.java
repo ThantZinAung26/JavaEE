@@ -20,6 +20,7 @@ public class CategoryAddController {
         Category category = new Category();
         category.setName(name);
         category.setCreationDate(new Date());
+        category.setShortDescription(shortDescription);
         categoryDAO.merge(category);
     }
 

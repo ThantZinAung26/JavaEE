@@ -26,7 +26,7 @@ public class ShopOrderListController {
     }
 
     public List<Product> getProductsInOrder(String orderId) {
-        return shopOrderDAO.getProductsInOrderById(orderId);
+        return shopOrderDAO.getOrderById(orderId).getProductsInOrder();
     }
 
 }

@@ -27,7 +27,7 @@ public abstract class AbstractEntity {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -35,7 +35,7 @@ public abstract class AbstractEntity {
     }
 
     public Date getCreationDate() {
-        return creationDate;
+        return this.creationDate;
     }
 
     public void setCreationDate(Date creationDate) {
@@ -43,7 +43,7 @@ public abstract class AbstractEntity {
     }
 
     public String getShortDescription() {
-        return shortDescription;
+        return this.shortDescription;
     }
 
     public void setShortDescription(String shortDescription) {
