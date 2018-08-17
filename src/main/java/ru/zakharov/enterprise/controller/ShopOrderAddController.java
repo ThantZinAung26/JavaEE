@@ -9,11 +9,6 @@ import ru.zakharov.enterprise.logger.Logger;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpSession;
@@ -31,8 +26,7 @@ public class ShopOrderAddController {
     @Inject
     private ProductDAO productDAO;
 
-    private HttpSession currentSession = (HttpSession) FacesContext.getCurrentInstance()
-            .getExternalContext().getSession(false);
+    private HttpSession currentSession;
 
 
     private ShopOrder shopOrder = new ShopOrder();
@@ -61,23 +55,6 @@ public class ShopOrderAddController {
         shopOrder.setAddress(address);
         shopOrder.setCreationDate(new Date());
     }
-
-
-//    @Interceptors(Logger.class)
-//    public String saveShopOrder() {
-//
-//
-/////*        //shopOrder.setId(currentSession.getId());
-////        //shopOrder.setProductsInOrder(list);
-////        shopOrder.setName(name);
-////        shopOrder.setFio(fio);
-////        shopOrder.setAddress(address);
-////        shopOrder.setCreationDate(new Date());
-////        shopOrderDAO.merge(shopOrder);
-////
-////        return "cart-list";*/
-//    }
-
 
     @Interceptors(Logger.class)
     public void addProductToOrder(Product product) {
