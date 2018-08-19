@@ -6,7 +6,6 @@ import ru.zakharov.enterprise.logger.Logger;
 
 import javax.ejb.Stateless;
 
-import javax.interceptor.Interceptor;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityGraph;
 import javax.persistence.Query;
@@ -56,5 +55,18 @@ public class CategoryDAO extends AbstractDAO {
     public void removeCategoryById(String categoryId) {
         Category category = entityManager.find(Category.class, categoryId);
         entityManager.remove(category);
+    }
+
+    public void createCategory(Category category) {
+        if (category == null) return;
+        entityManager.persist(category);
+    }
+
+    public List<Category> getCategoryByName(String name) {
+        Query query = entityManager.createQuery("SELECT c FROM Category c WHERE c.name = :name",
+                Category.class);
+        query.setParameter("name", name);
+        List<Category> categoryList= query.getResultList();
+        return categoryList;
     }
 }

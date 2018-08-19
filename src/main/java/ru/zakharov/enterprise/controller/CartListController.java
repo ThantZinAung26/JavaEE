@@ -4,6 +4,7 @@ import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.CategoryDAO;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.dao.ShopOrderDAO;
+import ru.zakharov.enterprise.entity.OrderItem;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.logger.Logger;
 
@@ -34,13 +35,13 @@ public class CartListController {
 
     private String orderId;
 
-    private List<Product> productList = new LinkedList<>();
+    private List<OrderItem> itemsList = new LinkedList<>();
 
     @Interceptors(Logger.class)
-    public List<Product> getProductList() {
+    public List<OrderItem> getProductList() {
         orderId = (String) currentSession.getAttribute(FieldConsts.ORDER_ID);
-        productList = shopOrderDAO.getOrderById(orderId).getProductsInOrder();
-        return productList;
+        itemsList = shopOrderDAO.getOrderById(orderId).getItems();
+        return itemsList;
     }
 
     @Interceptors(Logger.class)

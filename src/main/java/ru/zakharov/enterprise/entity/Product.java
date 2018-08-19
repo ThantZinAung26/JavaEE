@@ -1,10 +1,10 @@
 package ru.zakharov.enterprise.entity;
 
 
+
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Product extends AbstractEntity {
@@ -67,4 +67,6 @@ public class Product extends AbstractEntity {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+
 }

@@ -3,6 +3,7 @@ package ru.zakharov.enterprise.controller;
 import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.dao.ShopOrderDAO;
+import ru.zakharov.enterprise.entity.OrderItem;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
@@ -12,9 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @SessionScoped
 @ManagedBean
@@ -30,8 +29,8 @@ public class ShopOrderAddController {
 
 
     private ShopOrder shopOrder = new ShopOrder();
-    private List<Product> list = new LinkedList<>();
 
+    private List<OrderItem> list = new ArrayList<>();
 
     private String name = null;
 
@@ -43,13 +42,11 @@ public class ShopOrderAddController {
 
     private Date creationDate = null;
 
-    private int quantity;
-
     @Interceptors(Logger.class)
     public void init(HttpSession session) {
         currentSession = session;
         currentSession.setAttribute(FieldConsts.ORDER_ID, shopOrder.getId());
-        shopOrder.setProductsInOrder(list);
+        shopOrder.setItems(list);
         shopOrder.setName(name);
         shopOrder.setFio(fio);
         shopOrder.setAddress(address);
@@ -58,8 +55,21 @@ public class ShopOrderAddController {
 
     @Interceptors(Logger.class)
     public void addProductToOrder(Product product) {
-        list.add(product);
-        shopOrder.setProductsInOrder(list);
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setQuantity(1);
+
+        if (list.contains(orderItem)) {
+            int index = list.indexOf(orderItem);
+            int quantity = list.get(index).getQuantity();
+            list.get(index).setQuantity(++quantity);
+        } else {
+            list.add(orderItem);
+        }
+        shopOrderDAO.merge(orderItem);
+
+        shopOrder.setItems(list);
         shopOrderDAO.merge(shopOrder);
     }
 

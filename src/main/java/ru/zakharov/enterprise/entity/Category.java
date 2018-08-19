@@ -23,6 +23,10 @@ public class Category extends AbstractEntity {
         setShortDescription(description);
     }
 
+    public Category(String name) {
+        setName(name);
+    }
+
     public void addToCategory(Product newProduct) {
         productsInCategory.add(newProduct);
     }

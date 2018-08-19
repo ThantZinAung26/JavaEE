@@ -2,6 +2,7 @@ package ru.zakharov.enterprise.dao;
 
 
 import ru.zakharov.enterprise.entity.Category;
+import ru.zakharov.enterprise.entity.OrderItem;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
@@ -20,8 +21,12 @@ public class ShopOrderDAO extends AbstractDAO {
 
     @Interceptors(Logger.class)
     public ShopOrder merge(ShopOrder shopOrder) {
-
         return entityManager.merge(shopOrder);
+    }
+
+    @Interceptors(Logger.class)
+    public OrderItem merge(OrderItem orderItem) {
+        return entityManager.merge(orderItem);
     }
 
     public List<ShopOrder> getAllOrders() {
@@ -51,11 +56,18 @@ public class ShopOrderDAO extends AbstractDAO {
 
         ShopOrder shopOrder = entityManager.find(ShopOrder.class, orderId);
 
-        List<Product> list = shopOrder.getProductsInOrder();
-        System.out.println(list);
-        list.remove(product);
+        List<OrderItem> list = shopOrder.getItems();
 
-        shopOrder.setProductsInOrder(list);
+        for (OrderItem item : list) {
+            if (item.getProduct().getId()
+                    .equals(product.getId())) {
+
+                if (item.getQuantity() != 0) {
+                    item.setQuantity(item.getQuantity() - 1);
+                }
+            }
+        }
+        shopOrder.setItems(list);
 
         entityManager.merge(shopOrder);
     }

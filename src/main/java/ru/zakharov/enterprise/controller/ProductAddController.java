@@ -34,7 +34,7 @@ public class ProductAddController {
 
     private String fullDesc = "";
 
-    private Date creationDate = null;
+    //private Date creationDate = null;
 
     public void saveProduct() {
         if (categoryId == null) {
@@ -47,7 +47,7 @@ public class ProductAddController {
         product.setShortDescription(shortDesc);
         product.setFullDescription(fullDesc);
         product.setPicFileName(picFileName);
-        product.setCreationDate(new Date());
+        //product.setCreationDate(new Date());
         Category category = categoryDAO.getCategoryById(categoryId);
         product.setCategory(category);
         category.addToCategory(product);
@@ -94,9 +94,9 @@ public class ProductAddController {
         this.fullDesc = fullDesc;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+//    public Date getCreationDate() {
+//        return creationDate;
+//    }
 
     public String getPicFileName() {
         return picFileName;
