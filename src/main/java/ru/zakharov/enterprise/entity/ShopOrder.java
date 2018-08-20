@@ -14,12 +14,10 @@ public class ShopOrder extends AbstractEntity {
     private String address = null;
 
     public ShopOrder() {
-
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "shopOrder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
-
 
     public String getFio() {
         return fio;

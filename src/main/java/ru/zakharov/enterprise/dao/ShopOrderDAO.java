@@ -3,7 +3,7 @@ package ru.zakharov.enterprise.dao;
 
 import ru.zakharov.enterprise.entity.Category;
 import ru.zakharov.enterprise.entity.OrderItem;
-import ru.zakharov.enterprise.entity.Product;
+
 import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
 
@@ -35,6 +35,16 @@ public class ShopOrderDAO extends AbstractDAO {
         return allOrders;
     }
 
+    public List<OrderItem> getItem(String orderId, String productId) {
+        Query query = entityManager.createQuery("SELECT o FROM OrderItem o WHERE o.shopOrder.id =:orderId " +
+                "AND o.product.id =:productId");
+        query.setParameter("orderId", orderId);
+        query.setParameter("productId", productId);
+        List<OrderItem> orderItems = query.getResultList();
+        if (orderItems == null) return null;
+        return orderItems;
+    }
+
     @Interceptors(Logger.class)
     public void removeOrderById(String orderId) {
         ShopOrder shopOrder = entityManager.find(ShopOrder.class, orderId);
@@ -43,32 +53,8 @@ public class ShopOrderDAO extends AbstractDAO {
 
     public ShopOrder getOrderById(String orderId) {
         EntityGraph graph = this.entityManager.getEntityGraph("graph.ShopOrder.products");
-
         Map hints = new HashMap();
         hints.put("javax.persistence.fetchgraph", graph);
-
-
         return entityManager.find(ShopOrder.class, orderId, hints);
-    }
-
-
-    public void removeProductFromOrder(String orderId, Product product) {
-
-        ShopOrder shopOrder = entityManager.find(ShopOrder.class, orderId);
-
-        List<OrderItem> list = shopOrder.getItems();
-
-        for (OrderItem item : list) {
-            if (item.getProduct().getId()
-                    .equals(product.getId())) {
-
-                if (item.getQuantity() != 0) {
-                    item.setQuantity(item.getQuantity() - 1);
-                }
-            }
-        }
-        shopOrder.setItems(list);
-
-        entityManager.merge(shopOrder);
     }
 }

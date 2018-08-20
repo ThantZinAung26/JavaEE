@@ -15,63 +15,58 @@
 </h:head>
 
 <h:body>
-    <div class="container">
 
-        <div class="header">
-            <ui:insert name="header">
-                <ui:include src="/WEB-INF/templates/header.xhtml"/>
-            </ui:insert>
-        </div>
 
-        <div class="content">
-            <h1>Ваша корзина</h1>
-            <p>#{session.id}</p>
-            <p:dataTable id="dataTable" value="#{cartListController.productList}" var="orderItem">
+    <div class="header">
+        <ui:insert name="header">
+            <ui:include src="/WEB-INF/templates/header.xhtml"/>
+        </ui:insert>
+    </div>
 
-                <p:column headerText="ID">
-                    <p:outputLabel value="#{orderItem.product.id}"/>
-                </p:column>
 
-                <p:column headerText="Название">
-                    <p:outputLabel value="#{orderItem.product.name}"/>
-                </p:column>
+    <h1>Ваша корзина</h1>
+    <h:form>
+        <p:dataTable id="dataTable" value="#{cartListController.orderItems}" var="item">
 
-                <p:column headerText="Краткое описание">
-                    <p:outputLabel value="#{orderItem.product.shortDescription}"/>
-                </p:column>
+            <p:column headerText="ID">
+                <p:outputLabel value="#{item.product.id}"/>
+            </p:column>
 
-                <p:column headerText="Полное описание">
-                    <p:outputLabel value="#{orderItem.product.fullDescription}"/>
-                </p:column>
+            <p:column headerText="Название">
+                <p:outputLabel value="#{item.product.name}"/>
+            </p:column>
 
-                <p:column headerText="Цена">
-                    <p:outputLabel value="#{orderItem.product.price}"/>
-                </p:column>
+            <p:column headerText="Краткое описание">
+                <p:outputLabel value="#{item.product.shortDescription}"/>
+            </p:column>
 
-                <p:column headerText="Путь к изображению">
-                    <p:outputLabel value="#{orderItem.quantity}"/>
-                </p:column>
+            <p:column headerText="Полное описание">
+                <p:outputLabel value="#{item.product.fullDescription}"/>
+            </p:column>
 
-                <p:column headerText="Путь к изображению">
-                    <p:outputLabel value="#{orderItem.product.picFileName}"/>
-                </p:column>
+            <p:column headerText="Цена">
+                <p:outputLabel value="#{item.product.price}"/>
+            </p:column>
 
-                <p:column>
-                    <p:commandLink actionListener="#{cartListController.removeProduct(orderItem.product)}"
-                                   update="dataTable">
-                        <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
-                    </p:commandLink>
-                </p:column>
+            <p:column headerText="Количество">
+                <p:outputLabel value="#{item.quantity}"/>
+            </p:column>
 
-            </p:dataTable>
+            <p:column>
+                <p:commandLink actionListener="#{cartListController.removeProduct(item)}"
+                               update="dataTable">
+                    <i class="fa fa-trash" style="font-size: 1.5em;margin: 5px;"/>
+                </p:commandLink>
+            </p:column>
 
-        </div>
+        </p:dataTable>
+    </h:form>
 
-        <div class="footer">
-            <ui:insert name="footer">
-                <ui:include src="/WEB-INF/templates/footer.xhtml"/>
-            </ui:insert>
-        </div>
+
+    <div class="footer">
+        <ui:insert name="footer">
+            <ui:include src="/WEB-INF/templates/footer.xhtml"/>
+        </ui:insert>
     </div>
 
 </h:body>

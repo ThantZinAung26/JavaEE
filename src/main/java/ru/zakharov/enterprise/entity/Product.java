@@ -19,7 +19,6 @@ public class Product extends AbstractEntity {
     private Category category = null;
 
     public Product() {
-
     }
 
     public Product(String name, String shortDescription) {

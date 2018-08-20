@@ -27,7 +27,6 @@ public class ShopOrderAddController {
 
     private HttpSession currentSession;
 
-
     private ShopOrder shopOrder = new ShopOrder();
 
     private List<OrderItem> list = new ArrayList<>();
@@ -51,25 +50,34 @@ public class ShopOrderAddController {
         shopOrder.setFio(fio);
         shopOrder.setAddress(address);
         shopOrder.setCreationDate(new Date());
+        if (shopOrderDAO.getOrderById(shopOrder.getId()) == null)
+            shopOrderDAO.merge(shopOrder);
     }
 
     @Interceptors(Logger.class)
     public void addProductToOrder(Product product) {
-
-        OrderItem orderItem = new OrderItem();
-        orderItem.setProduct(product);
-        orderItem.setQuantity(1);
-
-        if (list.contains(orderItem)) {
-            int index = list.indexOf(orderItem);
-            int quantity = list.get(index).getQuantity();
-            list.get(index).setQuantity(++quantity);
+        ShopOrder shopOrder = shopOrderDAO.getOrderById(this.shopOrder.getId());
+        final List<OrderItem> orderItems = shopOrderDAO.getItem(this.shopOrder.getId(), product.getId());
+        if (orderItems.size() == 0) {
+            OrderItem newOrderItem = new OrderItem();
+            newOrderItem.setShopOrder(this.shopOrder);
+            newOrderItem.setProduct(product);
+            newOrderItem.setQuantity(1);
+            shopOrder.getItems().add(newOrderItem);
         } else {
-            list.add(orderItem);
+            OrderItem oldOrderItem = orderItems.get(0);
+            List<OrderItem> orderItemList = shopOrder.getItems();
+            int quantity = 0;
+            int index = 0;
+            for (OrderItem item : orderItemList) {
+                if (item.getId().equals(oldOrderItem.getId())) {
+                    quantity = item.getQuantity();
+                    index = orderItemList.indexOf(item);
+                }
+            }
+            quantity++;
+            shopOrder.getItems().get(index).setQuantity(quantity);
         }
-        shopOrderDAO.merge(orderItem);
-
-        shopOrder.setItems(list);
         shopOrderDAO.merge(shopOrder);
     }
 
