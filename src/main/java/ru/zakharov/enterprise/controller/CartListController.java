@@ -5,7 +5,6 @@ import ru.zakharov.enterprise.dao.CategoryDAO;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.dao.ShopOrderDAO;
 import ru.zakharov.enterprise.entity.OrderItem;
-import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
 
@@ -14,7 +13,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
-import javax.persistence.criteria.Order;
 import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 import java.util.List;

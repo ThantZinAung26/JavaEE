@@ -1,4 +1,7 @@
 package ru.zakharov.enterprise.dao;
 
-public class UserDAO {
+import javax.ejb.Stateless;
+
+@Stateless
+public class UserDAO extends AbstractDAO{
 }
