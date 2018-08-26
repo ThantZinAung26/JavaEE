@@ -4,7 +4,8 @@ import ru.zakharov.enterprise.constants.FieldConsts;
 import ru.zakharov.enterprise.dao.CategoryDAO;
 import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.dao.ShopOrderDAO;
-import ru.zakharov.enterprise.entity.Product;
+import ru.zakharov.enterprise.entity.OrderItem;
+import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
 
 import javax.faces.bean.ManagedBean;
@@ -34,18 +35,35 @@ public class CartListController {
 
     private String orderId;
 
-    private List<Product> productList = new LinkedList<>();
+    private List<OrderItem> itemsList = new LinkedList<>();
 
     @Interceptors(Logger.class)
-    public List<Product> getProductList() {
+    public List<OrderItem> getOrderItems() {
         orderId = (String) currentSession.getAttribute(FieldConsts.ORDER_ID);
-        productList = shopOrderDAO.getOrderById(orderId).getProductsInOrder();
-        return productList;
+        itemsList = shopOrderDAO.getOrderById(orderId).getItems();
+        return itemsList;
     }
 
-    @Interceptors(Logger.class)
-    public void removeProduct(Product product) {
-        shopOrderDAO.removeProductFromOrder(orderId, product);
+    public void removeProduct(OrderItem orderItem) {
+
+        ShopOrder shopOrder = shopOrderDAO.getOrderById(orderId);
+        int index = itemsList.indexOf(orderItem);
+        int quantity = orderItem.getQuantity();
+        if (quantity == 1) {
+            itemsList.remove(orderItem);
+        } else if (quantity > 1) {
+            itemsList.get(index).setQuantity(--quantity);
+        }
+
+        shopOrder.setItems(itemsList);
+        shopOrderDAO.merge(shopOrder);
+
+    }
+
+    public List<OrderItem> getProducts() {
+        orderId = (String) currentSession.getAttribute(FieldConsts.ORDER_ID);
+        itemsList = shopOrderDAO.getOrderById(orderId).getItems();
+        return itemsList;
     }
 
 }

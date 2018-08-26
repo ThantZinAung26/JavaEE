@@ -1,12 +1,14 @@
 package ru.zakharov.enterprise.dao;
 
 
+import ru.zakharov.enterprise.entity.Category;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.logger.Logger;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.Query;
+import javax.ws.rs.Produces;
 import java.util.List;
 
 @Stateless
@@ -18,7 +20,7 @@ public class ProductDAO extends AbstractDAO {
     }
 
     public List<Product> getAllProducts() {
-        Query query = entityManager.createQuery("SELECT p FROM Product p");
+        Query query = entityManager.createQuery("SELECT p FROM Product p", Product.class);
         List<Product> allProducts = query.getResultList();
         return allProducts;
     }
@@ -30,7 +32,32 @@ public class ProductDAO extends AbstractDAO {
     }
 
     public Product getProductById(String productId) {
+        return entityManager.find(Product.class, productId);
+    }
+
+    public List<Product> getProductByName(final String productName) {
+        Query query = entityManager.createQuery("SELECT p FROM Product p WHERE p.name = :productName",
+                Product.class);
+        query.setParameter("productName", productName);
+        return (List<Product>) query.getResultList();
+    }
+
+    public List<Product> getListProductByCategoryId(final String categoryId) {
+        Query query = entityManager.createQuery("SELECT p FROM Product p WHERE p.category.id =:categoryId",
+                Product.class);
+        query.setParameter("categoryId", categoryId);
+        return (List<Product>) query.getResultList();
+    }
+
+    public void setCategoryForProduct(final String productId,
+                                      final String categoryId) {
         Product product = entityManager.find(Product.class, productId);
-        return product;
+        Category category = entityManager.find(Category.class, categoryId);
+        product.setCategory(category);
+        entityManager.merge(product);
+    }
+
+    public void createProduct() {
+        entityManager.persist(new Product());
     }
 }

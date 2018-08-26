@@ -5,12 +5,9 @@ import ru.zakharov.enterprise.dao.ProductDAO;
 import ru.zakharov.enterprise.entity.Category;
 import ru.zakharov.enterprise.entity.Product;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.util.Date;
 
 @ViewScoped
 @ManagedBean
@@ -34,8 +31,6 @@ public class ProductAddController {
 
     private String fullDesc = "";
 
-    private Date creationDate = null;
-
     public void saveProduct() {
         if (categoryId == null) {
             return;
@@ -46,8 +41,7 @@ public class ProductAddController {
         product.setPrice(price);
         product.setShortDescription(shortDesc);
         product.setFullDescription(fullDesc);
-        product.setPicFileName(picFileName);
-        product.setCreationDate(new Date());
+        product.setPictureFileName(picFileName);
         Category category = categoryDAO.getCategoryById(categoryId);
         product.setCategory(category);
         category.addToCategory(product);
@@ -92,10 +86,6 @@ public class ProductAddController {
 
     public void setFullDesc(String fullDesc) {
         this.fullDesc = fullDesc;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
     }
 
     public String getPicFileName() {

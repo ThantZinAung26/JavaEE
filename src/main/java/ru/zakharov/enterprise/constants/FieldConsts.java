@@ -12,4 +12,6 @@ public class FieldConsts {
 
     public static final String ORDER_ID = "orederId";
 
+    public static final String AUTH_OK = "authOk";
+
 }

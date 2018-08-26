@@ -1,6 +1,7 @@
 package ru.zakharov.enterprise.controller;
 
 import ru.zakharov.enterprise.dao.ShopOrderDAO;
+import ru.zakharov.enterprise.entity.OrderItem;
 import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
 
@@ -25,8 +26,8 @@ public class ShopOrderListController {
         shopOrderDAO.removeOrderById(orderId);
     }
 
-    public List<Product> getProductsInOrder(String orderId) {
-        return shopOrderDAO.getOrderById(orderId).getProductsInOrder();
+    public List<OrderItem> getProductsInOrder(String orderId) {
+        return shopOrderDAO.getOrderById(orderId).getItems();
     }
 
 }

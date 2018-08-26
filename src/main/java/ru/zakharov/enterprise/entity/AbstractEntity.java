@@ -1,8 +1,12 @@
 package ru.zakharov.enterprise.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,6 +24,11 @@ public abstract class AbstractEntity {
 
     public String getId() {
         return id;
+    }
+
+    @PrePersist
+    private void prePersist() {
+        creationDate = new Date();
     }
 
     public void setId(String id) {

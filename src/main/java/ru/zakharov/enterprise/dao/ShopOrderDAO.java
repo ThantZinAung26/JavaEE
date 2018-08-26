@@ -2,7 +2,8 @@ package ru.zakharov.enterprise.dao;
 
 
 import ru.zakharov.enterprise.entity.Category;
-import ru.zakharov.enterprise.entity.Product;
+import ru.zakharov.enterprise.entity.OrderItem;
+
 import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
 
@@ -20,14 +21,27 @@ public class ShopOrderDAO extends AbstractDAO {
 
     @Interceptors(Logger.class)
     public ShopOrder merge(ShopOrder shopOrder) {
-
         return entityManager.merge(shopOrder);
     }
 
+    @Interceptors(Logger.class)
+    public OrderItem merge(OrderItem orderItem) {
+        return entityManager.merge(orderItem);
+    }
+
     public List<ShopOrder> getAllOrders() {
-        Query query = entityManager.createQuery("SELECT o FROM ShopOrder o");
-        List<ShopOrder> allOrders = query.getResultList();
-        return allOrders;
+        Query query = entityManager.createQuery("SELECT o FROM ShopOrder o",ShopOrder.class);
+        return (List<ShopOrder>) query.getResultList();
+    }
+
+    public List<OrderItem> getItem(String orderId, String productId) {
+        Query query = entityManager.createQuery("SELECT o FROM OrderItem o WHERE o.shopOrder.id =:orderId " +
+                "AND o.product.id =:productId");
+        query.setParameter("orderId", orderId);
+        query.setParameter("productId", productId);
+        List<OrderItem> orderItems = query.getResultList();
+        if (orderItems == null) return null;
+        return orderItems;
     }
 
     @Interceptors(Logger.class)
@@ -38,25 +52,8 @@ public class ShopOrderDAO extends AbstractDAO {
 
     public ShopOrder getOrderById(String orderId) {
         EntityGraph graph = this.entityManager.getEntityGraph("graph.ShopOrder.products");
-
         Map hints = new HashMap();
         hints.put("javax.persistence.fetchgraph", graph);
-
-
         return entityManager.find(ShopOrder.class, orderId, hints);
-    }
-
-
-    public void removeProductFromOrder(String orderId, Product product) {
-
-        ShopOrder shopOrder = entityManager.find(ShopOrder.class, orderId);
-
-        List<Product> list = shopOrder.getProductsInOrder();
-        System.out.println(list);
-        list.remove(product);
-
-        shopOrder.setProductsInOrder(list);
-
-        entityManager.merge(shopOrder);
     }
 }

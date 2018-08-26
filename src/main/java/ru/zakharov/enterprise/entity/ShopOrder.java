@@ -2,12 +2,11 @@ package ru.zakharov.enterprise.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @NamedEntityGraph(name = "graph.ShopOrder.products",
-        attributeNodes = @NamedAttributeNode(value = "productsInOrder"))
+        attributeNodes = @NamedAttributeNode(value = "items"))
 public class ShopOrder extends AbstractEntity {
 
     private String fio = null;
@@ -15,12 +14,10 @@ public class ShopOrder extends AbstractEntity {
     private String address = null;
 
     public ShopOrder() {
-
     }
 
-    @ManyToMany
-    private List<Product> productsInOrder = new LinkedList<>();
-
+    @OneToMany(mappedBy = "shopOrder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
 
     public String getFio() {
         return fio;
@@ -38,11 +35,11 @@ public class ShopOrder extends AbstractEntity {
         this.address = address;
     }
 
-    public List<Product> getProductsInOrder() {
-        return productsInOrder;
+    public List<OrderItem> getItems() {
+        return items;
     }
 
-    public void setProductsInOrder(List<Product> productsInOrder) {
-        this.productsInOrder = productsInOrder;
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
     }
 }
