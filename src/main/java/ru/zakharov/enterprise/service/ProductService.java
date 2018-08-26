@@ -46,10 +46,8 @@ public class ProductService {
     public ProductDTO getProductById(@QueryParam(value = "id")
                                      @WebParam(name = "id", partName = "id")
                                              String productId) {
-
         Product product = productDAO.getProductById(productId);
         if (product == null) return null;
-
         return new ProductDTO(product);
     }
 
@@ -66,7 +64,6 @@ public class ProductService {
                                   @WebParam(name = "id", partName = "id")
                                           String productId) {
         productDAO.removeProductById(productId);
-
     }
 
     /**
@@ -85,12 +82,10 @@ public class ProductService {
 
         List<Product> productList = productDAO.getProductByName(productName);
         List<ProductDTO> dtoList = new ArrayList<>();
-        ProductDTO productDTO;
         for (Product index : productList) {
-            productDTO = new ProductDTO(index);
+            ProductDTO productDTO = new ProductDTO(index);
             dtoList.add(productDTO);
         }
-
         return dtoList;
     }
 
@@ -107,16 +102,12 @@ public class ProductService {
     public List<ProductDTO> getListProductByCategoryId(@QueryParam(value = "id")
                                                        @WebParam(name = "id", partName = "id")
                                                                String categoryId) {
-
         List<ProductDTO> dtoList = new ArrayList<>();
         List<Product> productList = productDAO.getListProductByCategoryId(categoryId);
-        ProductDTO productDTO;
-
         for (Product index : productList) {
-            productDTO = new ProductDTO(index);
+            ProductDTO productDTO = new ProductDTO(index);
             dtoList.add(productDTO);
         }
-
         return dtoList;
     }
 
@@ -133,13 +124,10 @@ public class ProductService {
 
         List<ProductDTO> dtoList = new ArrayList<>();
         List<Product> productList = productDAO.getAllProducts();
-        ProductDTO productDTO;
-
         for (Product index : productList) {
-            productDTO = new ProductDTO(index);
+            ProductDTO productDTO = new ProductDTO(index);
             dtoList.add(productDTO);
         }
-
         return dtoList;
     }
 

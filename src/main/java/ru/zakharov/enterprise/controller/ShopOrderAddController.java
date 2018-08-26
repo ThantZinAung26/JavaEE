@@ -8,6 +8,8 @@ import ru.zakharov.enterprise.entity.Product;
 import ru.zakharov.enterprise.entity.ShopOrder;
 import ru.zakharov.enterprise.logger.Logger;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -44,6 +46,7 @@ public class ShopOrderAddController {
     @Interceptors(Logger.class)
     public void init(HttpSession session) {
         currentSession = session;
+
         currentSession.setAttribute(FieldConsts.ORDER_ID, shopOrder.getId());
         shopOrder.setItems(list);
         shopOrder.setName(name);

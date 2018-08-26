@@ -3,8 +3,6 @@ package ru.zakharov.enterprise.dto;
 import ru.zakharov.enterprise.entity.Category;
 
 import java.util.Date;
-import java.util.List;
-
 
 public class CategoryDTO {
 
@@ -16,10 +14,7 @@ public class CategoryDTO {
 
     private Date creationDate;
 
-
-
     public CategoryDTO() {
-
     }
 
     public CategoryDTO(Category category) {

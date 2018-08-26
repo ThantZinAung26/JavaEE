@@ -66,7 +66,6 @@ public class CategoryDAO extends AbstractDAO {
         Query query = entityManager.createQuery("SELECT c FROM Category c WHERE c.name = :name",
                 Category.class);
         query.setParameter("name", name);
-        List<Category> categoryList= query.getResultList();
-        return categoryList;
+        return query.getResultList();
     }
 }

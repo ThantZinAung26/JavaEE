@@ -21,10 +21,8 @@ import java.util.List;
 @WebService
 @Path("/CategoryService")
 public class CategoryService {
-
     @Inject
     private CategoryDAO categoryDAO;
-
 
     /**
      * Создаем новую категорию товара
@@ -36,8 +34,8 @@ public class CategoryService {
     @Path(value = "/createCategory")
     @Produces(MediaType.APPLICATION_JSON)
     public List<CategoryDTO> createCategory(@WebParam(name = "name", partName = "name")
-                                      @QueryParam(value = "name")
-                                              String name) {
+                                            @QueryParam(value = "name")
+                                                    String name) {
 
         categoryDAO.createCategory(new Category(name));
 

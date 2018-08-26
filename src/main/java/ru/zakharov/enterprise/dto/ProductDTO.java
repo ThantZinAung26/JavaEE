@@ -22,7 +22,7 @@ public class ProductDTO {
 
     private int price;
 
-    private String picFileNam;
+    private String pictureFileName;
 
     public ProductDTO(Product product) {
         if (product == null) return;
@@ -31,9 +31,8 @@ public class ProductDTO {
         this.shortDescription = product.getShortDescription();
         this.creationDate = product.getCreationDate();
         Category category = product.getCategory();
-        if (category == null) {
-            categoryId = "";
-        } else
+        if (category == null) categoryId = "";
+        else
             this.categoryId = category.getId();
         this.fullDescription = product.getFullDescription();
         this.price = product.getPrice();
@@ -95,12 +94,12 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public String getPicFileNam() {
-        return picFileNam;
+    public String getPictureFileName() {
+        return pictureFileName;
     }
 
-    public void setPicFileNam(String picFileNam) {
-        this.picFileNam = picFileNam;
+    public void setPictureFileName(String pictureFileName) {
+        this.pictureFileName = pictureFileName;
     }
 
     public ProductDTO() {

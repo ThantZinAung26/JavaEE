@@ -32,27 +32,25 @@ public class ProductDAO extends AbstractDAO {
     }
 
     public Product getProductById(String productId) {
-        Product product = entityManager.find(Product.class, productId);
-        return product;
+        return entityManager.find(Product.class, productId);
     }
 
-    public List<Product> getProductByName(String productName) {
+    public List<Product> getProductByName(final String productName) {
         Query query = entityManager.createQuery("SELECT p FROM Product p WHERE p.name = :productName",
                 Product.class);
         query.setParameter("productName", productName);
-        List<Product> productList= query.getResultList();
-        return productList;
+        return (List<Product>) query.getResultList();
     }
 
-    public List<Product> getListProductByCategoryId(String categoryId) {
+    public List<Product> getListProductByCategoryId(final String categoryId) {
         Query query = entityManager.createQuery("SELECT p FROM Product p WHERE p.category.id =:categoryId",
                 Product.class);
         query.setParameter("categoryId", categoryId);
-        List<Product> productList= query.getResultList();
-        return productList;
+        return (List<Product>) query.getResultList();
     }
 
-    public void setCategoryForProduct(String productId, String categoryId) {
+    public void setCategoryForProduct(final String productId,
+                                      final String categoryId) {
         Product product = entityManager.find(Product.class, productId);
         Category category = entityManager.find(Category.class, categoryId);
         product.setCategory(category);

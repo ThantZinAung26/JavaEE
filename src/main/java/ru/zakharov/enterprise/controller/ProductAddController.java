@@ -41,7 +41,7 @@ public class ProductAddController {
         product.setPrice(price);
         product.setShortDescription(shortDesc);
         product.setFullDescription(fullDesc);
-        product.setPicFileName(picFileName);
+        product.setPictureFileName(picFileName);
         Category category = categoryDAO.getCategoryById(categoryId);
         product.setCategory(category);
         category.addToCategory(product);

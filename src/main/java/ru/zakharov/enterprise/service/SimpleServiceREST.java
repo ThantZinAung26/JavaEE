@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/SimpleService")
 public class SimpleServiceREST {
 
-
     @GET
     @Path("/ping")
     @Produces(MediaType.APPLICATION_JSON)

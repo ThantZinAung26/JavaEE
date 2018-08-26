@@ -1,10 +1,7 @@
 package ru.zakharov.enterprise.entity;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
 
 @Entity
 public class Product extends AbstractEntity {
@@ -13,7 +10,7 @@ public class Product extends AbstractEntity {
 
     private int price = 0;
 
-    private String picFileName = "";
+    private String pictureFileName = "";
 
     @ManyToOne
     private Category category = null;
@@ -27,20 +24,20 @@ public class Product extends AbstractEntity {
     }
 
     public Product(String name, String shortDescription,
-                   String fullDescription, int price, String picFileName) {
+                   String fullDescription, int price, String pictureFileName) {
         setName(name);
         setShortDescription(shortDescription);
         this.fullDescription = fullDescription;
         this.price = price;
-        this.picFileName = picFileName;
+        this.pictureFileName = pictureFileName;
     }
 
     public String getFullDescription() {
         return fullDescription;
     }
 
-    public String getPicFileName() {
-        return picFileName;
+    public String getPictureFileName() {
+        return pictureFileName;
     }
 
     public int getPrice() {
@@ -55,8 +52,8 @@ public class Product extends AbstractEntity {
         this.price = price;
     }
 
-    public void setPicFileName(String picFileName) {
-        this.picFileName = picFileName;
+    public void setPictureFileName(String picFileName) {
+        this.pictureFileName = picFileName;
     }
 
     public Category getCategory() {
@@ -66,6 +63,4 @@ public class Product extends AbstractEntity {
     public void setCategory(Category category) {
         this.category = category;
     }
-
-
 }

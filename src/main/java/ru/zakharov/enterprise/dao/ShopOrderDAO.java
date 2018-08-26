@@ -30,9 +30,8 @@ public class ShopOrderDAO extends AbstractDAO {
     }
 
     public List<ShopOrder> getAllOrders() {
-        Query query = entityManager.createQuery("SELECT o FROM ShopOrder o");
-        List<ShopOrder> allOrders = query.getResultList();
-        return allOrders;
+        Query query = entityManager.createQuery("SELECT o FROM ShopOrder o",ShopOrder.class);
+        return (List<ShopOrder>) query.getResultList();
     }
 
     public List<OrderItem> getItem(String orderId, String productId) {
